@@ -305,3 +305,6 @@ PS. In this repo there are ENV file that you can custom with your needs. You can
 
 ### Ps.
 Be ***careful*** with the paths and if you use containers you must bind the path of the model_store folder with the path of the model_store folder in the container and the paths of all projects. This because when you archive a model in all options you designate only the paths of all files.
+
+### Cite
+I used the official repo to create this documentation. You can see the [official repository](https://github.com/pytorch/serve) of torchserve for more info.
