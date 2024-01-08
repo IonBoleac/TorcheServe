@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ubuntu-deployment
+  namespace: torchserve-cluster
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ubuntu
+  template:
+    metadata:
+      labels:
+        app: ubuntu
+    spec:
+      volumes:
+      - name: shared-storage
+        persistentVolumeClaim:
+          claimName: pv-claim-nfs
+      containers:
+      - name: ubuntu-container
+        image: ubuntu:latest
+        command: ["sleep", "infinity"]
+        volumeMounts:
+        - name: shared-storage
+          mountPath: /home/ubuntu/

@@ -1,0 +1,5 @@
+
+model:
+  modelName: logreg
+  minWorkers: 1
+  maxWorkers: 1

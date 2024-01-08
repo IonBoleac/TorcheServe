@@ -1,0 +1,46 @@
+version: '3.8'
+services:
+  torchserve: 
+    image: pytorch/torchserve:latest-cpu
+    container_name: torchserve
+    ports:
+      - 8080:8080
+      - 8081:8081
+      - 8082:8082
+    volumes:
+      - ./model_store:/home/model-server/model-store
+      - ./docker_config.properties:/home/model-server/config.properties
+      - ./original_metrics_config.yml:/home/model-server/metrics_config.yml
+      - ./models_project/:/home/model-server/models_project/
+
+      # don't work... see more to resovle this issue:
+      # for this you must create a logs folder in the same directory as docker-compose.yml and in the logs folder create:
+      # - config subfolder
+      # - access_log.log
+      # - model_log.log
+      # - model_metrics.log
+      # - ts_log.log
+      # - ts_metrics.log
+      # - ./logs:/home/model-server/logs 
+    environment:
+      - MODEL_STORE=/home/model-server/model-store
+
+    
+    networks:
+      - app_net
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    ports:
+      - 9090:9090
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - app_net
+
+
+
+networks:
+  app_net:
+    driver: bridge

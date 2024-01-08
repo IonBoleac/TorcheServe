@@ -1,0 +1,22 @@
+dimensions:
+  - &model_name "ModelName"
+  - &worker_name "WorkerName"
+  - &level "Level"
+  - &device_id "DeviceId"
+  - &hostname "Hostname"
+  - &my_name "MyName"
+  - &my_level "MyLevel"
+
+model_metrics:
+  counter:
+    - name: NumberOfPredictions
+      unit: count
+      dimensions: [*my_name, *my_level, *hostname]
+# Dimension "Hostname" is automatically added for model metrics in the backend
+  gauge:
+    - name: HandlerTime
+      unit: ms
+      dimensions: [*model_name, *level]
+    - name: PredictionTime
+      unit: ms
+      dimensions: [*model_name, *level]

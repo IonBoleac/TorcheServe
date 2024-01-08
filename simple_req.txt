@@ -1,0 +1,13 @@
+torchserve
+torchdata
+torchtext
+torchvision
+torchaudio
+torch
+nvgpu
+PyYAML
+captum
+ts
+torch-model-archiver
+torch-workflow-archiver
+onnxruntime
