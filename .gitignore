@@ -16,6 +16,9 @@ logs/
 **/clioent.py
 **/Tutorial_udacity_PyTorch_2.ipynb
 
+# my personal folders
+**/model_logits
+
 # Created by https://www.toptal.com/developers/gitignore/api/python
 # Edit at https://www.toptal.com/developers/gitignore?templates=python
 

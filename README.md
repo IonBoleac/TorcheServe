@@ -8,6 +8,8 @@ This is a serving platform for **PyTorch** models in localhost
 If you want to use docker or k8s you must install docker and k8s first. To do so, it's recommended to follow this [link](https://github.com/alessandrogilli/lab-k8s) to install k8s and this [link](https://www.docker.com/products/docker-desktop/) to install docker on window. In this repo there are a [guide step-by-step](kubernetes/README) how to deploy torchserve on kubernetes cluster.
 
 ## 1) Installation
+If your intention is to use TorchServe platform on localhost, you should follow this section. If you want to use docker or k8s you should follow the next section.
+### 1.1) Install on localhost using pip
 1. Clone the official repository of torchserve
 ```bash
 git clone git@github.com:pytorch/serve.git
@@ -23,15 +25,20 @@ cd serve
 # cuda is optional
 python3 ./ts_scripts/install_dependencies.py #--cuda=...
 ```
-Another option is to install only `java` with command for more supervision:
-```bash
-sudo apt install openjdk-17-jdk
-```
-4. Install `torchserve` and `torch-model-archiver` (you can do this step in Python virtual environment).
+Another option to install read the file `./ts_scripts/install_dependencies.py` and install only the required packages.
+
+4. Or you can install all packages form [requirements](./simple_req.txt) file (you can do this step in Python virtual environment).
 ```bash
 # Install torchserve
 pip3 install -r simple_req.txt
 ```
+
+### 1.2) Install only torch-model-archiver
+If you want to use the serving platform of TorchServe on docker or kubernetes, you may install only `torch-model-archiver` and `torch-workflow-archiver` if you use workflow that are used to create `.mar` file. To do that you should follow this section.
+```bash
+pip3 install torch-model-archiver torch-workflow-archiver
+```
+
 
 ## 2) Usage torch-model-archiver and torchserve
 1. Go to the directory of your project and run this command to create a [model archive](https://github.com/pytorch/serve/blob/master/model-archiver/README.md). You should specify the name of your model, its version, its path to the serialized file, its handler, the path to the export `.mar` file, the path to the extra files - if you have any - and other options if you want them to be explained in the official repository of torchserve or in my documentation. Moreover, you should obviously create your serialized file, your handler, your model and your extra files before running this command and other extra files - if you have any - before running this command. You should use standard torchserve handler or [custom handler](https://github.com/pytorch/serve/blob/master/docs/custom_service.md#custom-handlers) and if you want to use custom handler, you should create it first, together with other custom file. You can see an example of creating a [model archive](https://github.com/pytorch/serve/blob/master/model-archiver/README.md) in the next section.
