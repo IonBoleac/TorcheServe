@@ -11,10 +11,10 @@ microk8s (1.22/stable) v1.22.2 from Canonical✓ installed
 ## 2) Enable esentials microk8s addons
 In this step you can enable microk8s addons. You can do it with this command:
 ```bash
-microk8s enable dns dashboard storage helm helm3
+microk8s enable dns dashboard 
 ```
 
-## n) How to use Prometheus and Grafana on microk8s
+## 3) How to use Prometheus and Grafana on microk8s
 In this step you can abilitate observability on microk8s. You can do it with this command:
 ```bash
 microk8s enable observability
@@ -66,7 +66,7 @@ After this you can see all pods and services created with this command:
 kubectl get po -A
 kubectl get svc -A
 ```
-## n) How to use Prometheus and Grafana on microk8s
+## 4) How to use Prometheus and Grafana on microk8s
 In firt place you must create an ingress to access to grafana and prometheus. But before you must discovere the service name and port used by grafana and prometheus. You can do it with this command:
 ```bash
 kubectl get svc -A | grep -E 'grafana|prometheus'
@@ -87,12 +87,14 @@ Now you can create an ingress to access to grafana and prometheus. In this repo 
 kubectl apply -f observability/ingress_grafana_observability.yaml
 ```
 After all these steps you can access to grafana and prometheus with this url:
-```html
+```bash
 grafana.<ip>.nip.io
 ```
 where the ip is the ip of your master kubernetes cluster and must be written correclty in the file ingres.yaml. You can find this ip with this command:
 ```bash
 microk8s kubectl get nodes -o wide
 ```
+
+
 
 
