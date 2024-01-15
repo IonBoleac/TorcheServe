@@ -130,8 +130,40 @@ kubectl delete -f kubernetes/deployment_torchserve.yaml
 kubectl delete -f kubernetes/service_torchserve.yaml
 ```
 
+## 8.1) NFS server
+I used an NFS server to share the models with all nodes of the cluster. To do this you must install NFS server on your machine and configure it correctly. You can do it with this command:
+```bash
+sudo apt install nfs-kernel-server
+```
+After this you must create a directory that will be shared with all nodes of the cluster. You can do it with this command:
+```bash
+sudo mkdir -p /media/nfs/
+```
+After this you must configure the NFS server to share the directory that you have created. You can do it with this command:
+```bash
+sudo nano /etc/exports
+```
+And add this line at the end of the file:
+```bash
+/media/nfs/ *(rw,sync,no_root_squash,no_subtree_check)
+```
+Where `/media/nfs/` is the path of the directory that you have created. See [this](https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nfs-mount-on-ubuntu-20-04) for more. After this syep you must restart the NFS server with this command:
+```bash
+sudo systemctl restart nfs-kernel-server
+```
+Now you can create a persistent volume and a persistent volume claim to bind the NFS server with your cluster. You can do it with this command:
+```bash
+kubectl apply -f kubernetes/pv_nfs.yaml
+kubectl apply -f kubernetes/pvClaim_nfs.yaml
+```
+Remember to copy the models in the directory that you have created. 
+See the file [`kubernetes/pv_nfs.yaml`](./pv_nfs.yaml) and [`kubernetes/pvClaim_nfs.yaml`](./pvClaim_nfs.yaml) for more details of the configuration.
+
+### CAVEAT
+Make attention with the paths and if you use `minikube` you must be very careful and configure it properly. This because minikube is a container in docker. 
+
 ## 9) Delete minikube
-In this step you can delete minikube and all file of him binded. You can do it with this command:
+In this step you can delete minikube and all files of him binded. You can do it with this command:
 ```bash
 minikube delete
 ```
