@@ -27,6 +27,20 @@ locust
 4. Open the locust UI in the browser at http://localhost:8089 and see the results
 
 ## Test APIs using k6s.io
-1. Install k6s.io
+1. To test k6s you need to install it first. To make it easy i used docker container to run it. In first you must clone this repository because there are all needed files to create all containers to run k6s. More info are [here](https://webcache.googleusercontent.com/search?q=cache:https://medium.com/swlh/beautiful-load-testing-with-k6-and-docker-compose-4454edb3a2e3).
 ```bash
+git clone https://github.com/luketn/docker-k6-grafana-influxdb.git
+cd docker-k6-grafana-influxdb
 ```
+After that run this command to run grafana and influxdb:
+```bash
+docker compose up -d influxdb grafana
+```
+2. Now you can run your test. In my case i used this command:
+```bash
+docker compose run k6 run /path/to/script-test.js
+```
+3. After this you can see the dashboard in grafana at http://localhost:3000/d/k6/k6-load-testing-results 
+
+## Read metrics
+Now you can collect all needed metrcis to see how your application works. GOOD LUCK!
