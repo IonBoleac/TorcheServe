@@ -1,6 +1,4 @@
-FROM pytorch/torchserve:latest-cpu
-WORKDIR /home/model-store
-RUN apt-get update && apt-get upgrade -y
+FROM pytorch/torchserve:latest
+# Install dependencies (pandas, numpy, pypi-json)
 RUN pip install --upgrade pip
-
-
+RUN pip install pandas numpy pypi-json 

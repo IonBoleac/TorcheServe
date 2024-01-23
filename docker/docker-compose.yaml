@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   torchserve: 
-    image: pytorch/torchserve:latest-cpu
+    image: ciao:latest
     container_name: torchserve
     ports:
       - 8080:8080
