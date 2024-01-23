@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: torchserve
-          image: pytorch/torchserve:latest # localhost:32000/mynginx:registry
+          image: pytorch/torchserve:latest # <ip_address>:32000/mynginx:registry
           env:
             - name: MODEL_STORE
               value: /home/model-server/shared/model_store/
