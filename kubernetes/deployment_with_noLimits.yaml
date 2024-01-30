@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-torchserve
+  labels:
+    app: torchserve
+  namespace: torchserve-cluster  # Set the desired namespace here
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: torchserve
+  template:
+    metadata:
+      labels:
+        app: torchserve
+    spec:
+      containers:
+        - name: torchserve
+          image: localhost:32000/mytorchserve # <ip_address>:32000/mynginx:registry
+          env:
+            - name: MODEL_STORE
+              value: /home/model-server/shared/model_store/
+            - name: TS_CONFIG_FILE
+              value: /home/model-server/shared/config.properties
+          #args: ["torchserve", "--start" ,"--ncs", "--model-store", "/home/model-server/shared/model-store/"]
+          ports:
+            - containerPort: 8080
+            - containerPort: 8081
+            - containerPort: 8082
+          volumeMounts:
+            - name: shared-storage
+              mountPath: /home/model-server/shared/
+              
+          readinessProbe:
+            httpGet:
+              path: /ping
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+      volumes:
+        - name: shared-storage
+          persistentVolumeClaim:
+            claimName: pv-claim-nfs
+
+# kubectl exec -n torchserve-cluster pod/nomepod -it -- bash
+
+# per esporre il service da minikube bisogna eseguire questo comando:
+# minikube service nome-service [-n namespace-cluster]
+            
