@@ -5,7 +5,7 @@
             margin-right: auto;
             width: 100%;"></img><br></br>
 This is a serving platform for **PyTorch** models in localhost
-If you want to use docker or k8s you must install docker and k8s first. To do so, it's recommended to follow this [link](https://github.com/alessandrogilli/lab-k8s) to install k8s and this [link](https://www.docker.com/products/docker-desktop/) to install docker on window. In this repo there are a [guide step-by-step](kubernetes/README) how to deploy torchserve on kubernetes cluster.
+If you want to use docker or k8s you must install docker and k8s first. To do so, it's recommended to follow this [link](https://github.com/alessandrogilli/lab-k8s) to install k8s and this [link](https://www.docker.com/products/docker-desktop/) to install docker on window. In this repo there are a [guide step-by-step](kubernetes/README.md) how to deploy torchserve on kubernetes cluster.
 
 ## 1) Installation
 If your intention is to use TorchServe platform on localhost, you should follow this section. If you want to use docker or k8s you should follow the next section.
