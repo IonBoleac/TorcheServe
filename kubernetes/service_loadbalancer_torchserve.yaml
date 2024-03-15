@@ -6,6 +6,7 @@ metadata:
     name: torchserve
   namespace: torchserve-cluster  # Set the desired namespace here
 spec:
+  # ClusterIP is the default ServiceType and selected here explicitly for clarity (Used for internal communication only)
   type: ClusterIP
   selector:
     app: torchserve

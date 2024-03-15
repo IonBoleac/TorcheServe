@@ -5,6 +5,7 @@ metadata:
   namespace: torchserve-cluster
 spec:
   rules:
+  # create a rule for the ManagementAPI endpoint -> torchserve-IP:8081/
   - host: torchserve-management.10.27.2.28.nip.io
     http:
       paths:

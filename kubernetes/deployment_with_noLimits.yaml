@@ -17,6 +17,7 @@ spec:
     spec:
       containers:
         - name: torchserve
+        # used custom image of torchserve to run on k8s, you can use the official image as well -> pytorch/torchserve:latest
           image: localhost:32000/mytorchserve # <ip_address>:32000/mynginx:registry
           env:
             - name: MODEL_STORE
